@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<!--  html5 -->
+<html lang="sv">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+        <!-- <link crossorigin="anonymous" href="https://fonts.googleapis.com/css?family=Domine|Frank+Ruhl+Libre|Libre+Baskerville|Prata|Scope+One|Unna|Glegoo" rel="stylesheet"> -->
+
+        <link href="https://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet">
+        <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../assets/css/ruka.css">
+        <link rel="stylesheet" href="../assets/css/ruka-scrollbar.css">
+        <link rel="stylesheet" href="../assets/css/ruka-loader.css">
+        <link rel="stylesheet" href="../assets/css/custom.css">
+        <link rel="stylesheet" href="../assets/css/animation.css">
+
+        <!-- Service worker installation -->
+        <script type="text/javascript" src="../resources/system/AppInstaller.js"></script>
+
+        <!-- Flowscroll build -->
+        <script type="text/javascript" src="../resources/build.js"></script>
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" async="async"></script>
+
+        <!-- RukaOS -->
+        <script type="text/javascript" src="../../app.js"></script>
+        
+        <title>RukaOS</title>
+
+    </head>
+  
+    <body>
+
+        <!--DEFAULT SETTINGS-->
+        <default-settings
+        height="100%"
+        transitions="slide_horizontal"
+        prevent="true"
+        noloader="true"
+        ></default-settings>
+
+        <!--PARENT PAGE SETTINGS-->
+        <page-settings 
+        for="main-content"
+        height="100%"
+        transitions="fold_vertical"
+        mode="scroll"
+        noloader="true"
+        preload="1"
+        ></page-settings>
+
+        <!--SUB-PAGE SETTINGS-->
+        <page-settings
+        for="episode-content"
+        height="100%"
+        transitions="slide_horizontal"
+        mode="button"
+        prevent="true"
+        previous="episode-prev"
+        next="episode-next"
+        noloader="true"
+        preload="2"
+        ></page-settings>
+        <!--
+        <global-settings
+        for="blog-content"
+        height="100%"
+        transitions="slide_horizontal"
+        mode="button"
+        prevent="true"
+        noloader="true"
+        previous="blog-prev"
+        preload="1"
+        next="blog-next"
+        ></global-settings>
+        -->
+
+        <custom-settings
+        prevent="true"
+        transitions="true"
+        animations="true"
+        resolution="true"
+        noloader="true"
+        ></custom-settings>
+
+        <!--
+        <div id="global-menu">
+            <ul>
+                <li>Option 1</li>
+                <li>Option 2</li>
+                <li>Option 3</li>
+                <li>Option 4</li>
+            </ul>
+        </div> -->
+
+        <div class="scroll-bar" data-scroll-bar="main-content"></div>
+        <div class="episode-menu-wrapper fold-left" scrollable="true">
+            <ul class="episode-menu"></ul>
+        </div>
+        <div class="scroll-icon">
+            <div></div>
+        </div>
+
+        <div class="cover"></div>
+
+        <div class="pod-player"></div>
+        <div id="main-content" class="global-wrapper">
+
+            <div 
+            class="page-wrapper hero-banner scroll-page"
+            style="opacity: 0;"
+            background="url('../assets/pics/new_background.png')"
+            title="Hem">
+            <div 
+            scrollable="true"
+            class="content-box right text-field align">      
+                <h1 class="description">
+                    Welcome to SoM@ Ruka
+                </h1>
+                <h3>A PWA ready JS Library for ressembling Mobile UIs</h3>
+            </div>
+            </div>
+
+            <div 
+            class="page-wrapper scroll-page"
+            background="linear-gradient(to bottom, #e5b654 30%, #373737 110%)"
+            title="Podd">
+
+                <div id="episode-prev" class="arrow previous"></div>
+
+                <div class="global-wrapper first episode-wrapper" id="episode-content">
+
+                    <div 
+                    class="page-wrapper content-box main-box w90 grid episode-frame"
+                    background="linear-gradient(to bottom, #e5b654 30%, #373737 110%)">
+                        
+                            <div 
+                            scrollable="true"
+                            class="content-box right text-field align">
+
+                            <div class="download w100">
+                                <div class="episode-cover h50">
+                                    <img 
+                                    crossorigin="anonymous"
+                                    class="image w100">
+                                    <source
+                                    crossorigin="anonymous"
+                                    class="audio h10 w100" controls></source>
+                                </div>
+                                <div class="episode-fade"></div>
+                                <span class="pubdate"></span>
+                            </div>
+                            
+                            <h3 class="title"></h3>
+                            <h4><a class="download-link" target="_blank" download></a></h4>
+                            <div class="text">
+                                <p class="description"></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="episode-scroll-bar" data-scroll-bar="episode-content"></div>
+                
+                <div id="episode-next" class="arrow next"></div>
+
+            </div>
+
+<!--
+            <div 
+            class="page-wrapper scroll-page"
+            background="url('../assets/pics/new_background.jpg')"
+            title="Blogg">
+
+                <div id="blog-prev" class="arrow previous"></div>
+
+                <div class="global-wrapper first blog-wrapper" id="blog-content">
+
+                    <div class="page-wrapper content-box main-box w90 grid blog-frame">
+                        
+                            <div 
+                            scrollable="true"
+                            class="content-box right text-field align">
+
+                            <h4><a class="download-link" target="_blank" download></a></h4>
+                            <div class="text">
+                                <h3 class="title"></h3>
+                                <span class="date"></span>
+                                <p class="description"></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="blog-scroll-bar"></div>
+                
+                <div id="blog-next" class="arrow next"></div>
+
+            </div>
+            <div 
+            class="page-wrapper scroll-page"
+            background="url('../assets/pics/new_background.jpg')"
+            title="Lajks">
+
+            </div>
+-->
+        </div>
+
+
+
+    </body>
+</html>
