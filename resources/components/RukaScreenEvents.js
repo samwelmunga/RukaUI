@@ -203,7 +203,7 @@ var m_this = this,
             // TODO: Review
             if(dir) {
                 if(dir.orientation == 'vertical') { 
-                    if(e.type == 'touchend' && isScrollable(e)) return;// only vertical?
+                    if(e.type == 'touchend' && isScrollable(e)) return;// only vertical? most mouses only support vertical scrolling 
                     else ix = 0;
                 }
             }

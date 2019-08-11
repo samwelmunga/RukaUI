@@ -12,7 +12,7 @@
 /**
  *  Runtime
  *
- *  @version    1.0
+ *  @version    2.34
  *  @copyright  Copyright (c) 2017-2022.
  *  @license    Creative Commons (BY-NC-SA) 3.0
  *  @since      Nov 15, 2017
@@ -55,6 +55,26 @@
     loader:         null,
 
     settings:       null,
+
+    pageEvents:     {
+
+      get scroll() {
+        return 'scroll';
+      },
+
+      get button() {
+        return 'button';
+      },
+
+      get timer() {
+        return 'timer';
+      },
+
+      get touch() {
+        return 'touch';
+      }
+
+    },
 
     init: function() {
 
@@ -156,14 +176,17 @@
         if(layers[i].children.length < 1) continue;
         s = settings.filter(function(_s){ return _s.getAttribute('for') == layers[i].id; })[0] || document.get('default-settings')[0];
         main.ui[i] = new RukaPage(layers[i].children, s);
-        
-        switch(main.ui[i].mode) {
-          case 'scroll': main.initScrollMode(main.ui[i]); break;
-          case 'timer' : main.initTimerMode(main.ui[i]); break;
-          case 'button': main.initButtonMode(main.ui[i]); break;
-          default: main.initScrollMode(main.ui[i]);
-        };
+        main.ui[i].mode.split(',').map(main.initMode.bind(main.ui[i]))
       }
+    },
+
+    initMode: function( mode ) {
+      switch(mode) {
+        case main.pageEvents.scroll: main.initScrollMode(this); break;
+        case main.pageEvents.timer : main.initTimerMode(this);  break;
+        case main.pageEvents.button: main.initButtonMode(this); break;
+        default: main.initScrollMode(this);
+      };
     },
 
     initScrollMode: function( ui ) {
@@ -178,10 +201,12 @@
   
           parent.addEventListener('touchstart', function(e) {
             e.stopPropagation();
+            ui.eventData.type = main.pageEvents.touch;
             main.screen.checkTouchScreenNavigation.call(parent, e);
           });
           parent.addEventListener('touchend', function(e) {
             e.stopPropagation();
+            ui.eventData.type = main.pageEvents.touch;
             main.screen.checkTouchScreenNavigation.call(parent, e);
           });
   
@@ -197,6 +222,7 @@
             main.screen.addTouchEvents(document.body, true);
           } else {
             window.addEventListener('scroll', function(e) {
+              ui.eventData.type = main.pageEvents.scroll;
               var p1 = ui.page;
               var p2 = ui.autoUpdateInterface.call(ui);
               main.dispatchEvent(ui.dom, p1, p2);
@@ -211,6 +237,7 @@
 
       ui.layers.map(function( parent ) { parent.classList.add('absolute'); });
       setInterval(function() {
+        ui.eventData.type = main.pageEvents.timer;
         var p1 = ui.page;
         var p2 = ui.autoUpdateInterface.call(ui);
         main.dispatchEvent(ui.dom, p1, p2);
@@ -223,10 +250,12 @@
       var ix = main.ui.indexOf(ui);
 
       ui.prevBtn.addEventListener('click', function(e) {
+        ui.eventData.type = main.pageEvents.button;
         ui.autoUpdateInterface.call(ui,0);
         main.dispatchEvent(this, 2, 1);
       });
       ui.nextBtn.addEventListener('click', function(e) {
+        ui.eventData.type = main.pageEvents.button;
         ui.autoUpdateInterface.call(ui,1);
         main.dispatchEvent(this, 1, 2);
       });

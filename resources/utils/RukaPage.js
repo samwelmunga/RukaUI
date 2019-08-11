@@ -87,7 +87,27 @@
 
     this.fullscreen   = false;
 
-    this.mode         = settings.getAttribute('mode') || 'scroll';
+    this.modes        = {
+
+      get scroll() {
+        return 'scroll';
+      },
+
+      get button() {
+        return 'button';
+      },
+
+      get timer() {
+        return 'timer';
+      },
+
+      get touch() {
+        return 'touch';
+      }
+
+    }
+
+    this.mode         = settings.getAttribute('mode') || this.modes.scroll;
 
     this.autoTimer    = settings.getAttribute('timer') || 5000;
     
@@ -153,30 +173,30 @@
   se.soma.media.utils.view.RukaPage.prototype.autoUpdateInterface = function( dir ) {
     this.offset = window.pageYOffset;
   
-  if(this.scrolling == true || this.calls > 0) {
-    if(this.mode != 'scroll') return;
-    window.scrollTo(0, this.margin);
-    return;
-  }
-  
-  this.scrolling = true;
-  this.eventEnded = false;
-  
-  if(this.mode == 'scroll') {
-    window.scrollTo(0, this.margin); 
-  }
-  
-  this.loader.classList.remove('inactive');
+    if(this.scrolling == true || this.calls > 0) {
+      if(this.mode != this.modes.scroll) return;
+      window.scrollTo(0, this.margin);
+      return;
+    }
+    
+    this.scrolling = true;
+    this.eventEnded = false;
+    
+    if(this.mode == this.modes.scroll) {
+      window.scrollTo(0, this.margin); 
+    }
+    
+    this.loader.classList.remove('inactive');
 
-  switch(this.mode) {
-    case 'scroll': updateScrollDirection.call(this); break;
-    case 'timer' : updatePageDirection.call(this);   break;
-    case 'button': this.direction = !!dir; break;
-  }
+    switch(this.mode) {
+      case this.modes.scroll: updateScrollDirection.call(this); break;
+      case this.modes.timer : updatePageDirection.call(this);   break;
+      case this.modes.button: this.direction = !!dir; break;
+    }
 
-  console.log('autoUpdateInterface', this);
-  updatePages.call(this);
-  return this.page;
+    console.log('autoUpdateInterface', this, dir);
+    updatePages.call(this);
+    return this.page;
     
   };
 
@@ -191,7 +211,8 @@
 
   se.soma.media.utils.view.RukaPage.prototype.touchUpdateInterface = function( e, dir ) {
 
-    if(!dir) return;
+    if(!dir || dir.orientation != this.orientation) return;
+
 console.log('touchUpdateInterface', this)
     this.eventData.touch = dir;
     this.direction       = dir.isNext;
@@ -201,13 +222,13 @@ console.log('touchUpdateInterface', this)
     console.log('dir', dir, Math.abs(this.offset));
     
     if(Math.abs(this.offset) < 30) return;
-    if(this.mode != 'scroll') {
+    if(this.mode != this.modes.scroll) {
       var d = this.direction ? 1 : -1;
       this.manualUpdateInterface(this.page + d)
     } else {
       updatePages.call(this);
     }
-
+    this.eventData = {}; // ok?
   };
 
   se.soma.media.utils.view.RukaPage.prototype.resetUI = function() {
@@ -273,7 +294,7 @@ console.log('touchUpdateInterface', this)
 
     prevent       = transition.prevent || this.settingsTag.hasAttribute('prevent') || false;
 
-    scrollDelay   = (this.mode == 'button') ? 300 : (prevent) ? 1100 : 1300;
+    scrollDelay   = (this.mode == this.modes.button) ? 300 : (prevent) ? 1100 : 1300;
 
     pageCacheSize = Number(this.settingsTag.getAttribute('preload')) || pageCacheSize;
 
@@ -283,7 +304,7 @@ console.log('touchUpdateInterface', this)
     
     this.settings.pageCacheSize = pageCacheSize;
 
-    console.log('this.settings.transition', this.settings.transition);
+    // console.log('this.settings', this.settings.transition);
 
   }
 
@@ -384,7 +405,7 @@ console.log('touchUpdateInterface', this)
     this.scrollBar.setHandler(this.manualUpdateInterface);
     this.scrollBar.updateScrollBar(this.activePage);
     this.addSettings({ scrollBar: this.scrollBar });
-    console.log('initscrollBar > ' + this.id, scrollBar)
+    // console.log('initscrollBar > ' + this.id, scrollBar)
     
   }
 
@@ -426,7 +447,7 @@ console.log('touchUpdateInterface', this)
     if(this.scrollBar)
       this.scrollBar.updateScrollBar(this.page);
     resetPages.call(this);
-    console.log('updatePages', this)
+    console.log('updatePages', data)
     
   }
 
@@ -502,7 +523,7 @@ console.log('touchUpdateInterface', this)
     //this.activePage.activate();
     
     if(this.activePage.hasAttribute('background')) {
-      (this.mode == 'scroll') 
+      (this.mode == this.modes.scroll) 
       ? this.dom.setAttribute('style', 'background:' + this.activePage.getAttribute('background'))
       : this.parent.setAttribute('style', 'background:' + this.activePage.getAttribute('background'));
     } // else this.parent.style.background = '#000';
@@ -566,7 +587,7 @@ console.log('touchUpdateInterface', this)
 
   function endScroll( layer ) {
 
-    if(this.mode == 'scroll') {
+    if(this.mode == this.modes.scroll) {
       window.scrollTo(0, this.margin);
     }
     
