@@ -105,7 +105,7 @@
         return 'touch';
       }
 
-    }
+    };
 
     this.mode         = settings.getAttribute('mode') || this.modes.scroll;
 

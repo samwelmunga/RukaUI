@@ -227,7 +227,7 @@ se.soma.media.components.AudioTrack = (function( obj, parent, autoplay ) {
 
         var buttons = btns[soundIcon];
 
-        if(Ruka.isMobile()) {
+        if(RukaUI.isMobile()) {
             return m_this.soundRange.dom.classList.toggle('inactive');
         }
 
@@ -367,7 +367,7 @@ se.soma.media.components.AudioTrack = (function( obj, parent, autoplay ) {
         },
         {
             element: sndRange,
-            class: function() { return Ruka.isMobile() ? 'inactive' : ''; }(),
+            class: function() { return RukaUI.isMobile() ? 'inactive' : ''; }(),
             ref: 'soundRange',
             value: 50,
             on: { change: setSound }

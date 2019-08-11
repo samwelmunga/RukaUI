@@ -47,7 +47,7 @@ if(!window.se.soma.system) window.se.soma.system  = {};
         baseURI + 'utils/RukaPage',
         baseURI + 'utils/MediaPlayer',
         baseURI + 'utils/MailService',
-        baseURI + 'system/Ruka',
+        baseURI + 'system/RukaUI',
         baseURI + 'scope/Alias',
         baseURI + 'system/Polyfill'
     ];

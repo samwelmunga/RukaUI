@@ -53,7 +53,7 @@ se.soma.media.utils.Alias = (function() {
     
     Loader            = se.soma.media.components.Loader;
 
-    Ruka              = se.soma.system.Ruka;
+    RukaUI              = se.soma.system.RukaUI;
 
     return _this;
 

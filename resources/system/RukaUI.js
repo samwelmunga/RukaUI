@@ -1,5 +1,5 @@
 //--------------------------------------------------------------------------
-// Public class Ruka
+// Public class RukaUI
 //--------------------------------------------------------------------------
 
 
@@ -44,7 +44,7 @@
       
       load = false;
 
-  window.se.soma.system.Ruka = {
+  window.se.soma.system.RukaUI = {
 
     ui:             [],
 
@@ -78,8 +78,8 @@
 
     init: function() {
 
-      console.log('Starting Ruka');
-      if(!main) main = se.soma.system.Ruka;
+      console.log('Starting RukaUI');
+      if(!main) main = se.soma.system.RukaUI;
       if(!view) view = new RukaRenderer();
 
       var layers     = document.get('.global-wrapper'),
@@ -94,7 +94,7 @@
       load = true;
       // main.removeSettingsTags(settings);
       // main.removeSettingsTags(user_sett);
-      console.log('Ruka loaded');
+      console.log('RukaUI loaded');
 
     },
 
@@ -151,7 +151,7 @@
     },
 
     connect: function( _on, _off ) {
-      if(!main) main = se.soma.system.Ruka;
+      if(!main) main = se.soma.system.RukaUI;
       back = _on;
       lost = _off;
       main.pingConnection();
@@ -300,7 +300,7 @@
 
   };
   
-  Object.defineProperties(window.se.soma.system.Ruka, {
+  Object.defineProperties(window.se.soma.system.RukaUI, {
 
     loaded: {
       get: function() {
