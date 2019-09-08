@@ -178,6 +178,7 @@
         main.ui[i] = new RukaPage(layers[i].children, s);
         main.ui[i].mode.split(',').map(main.initMode.bind(main.ui[i]))
       }
+      console.log('Ruka page:', RukaPage);
     },
 
     initMode: function( mode ) {

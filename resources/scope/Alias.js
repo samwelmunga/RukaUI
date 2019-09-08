@@ -12,7 +12,7 @@
  *  @since      Nov 15, 2017
  *  @author     Samwel Munga <samwelmunga88@hotmail.se>
  */
-se.soma.media.utils.Alias = (function() {
+se.soma.utils.Alias = (function() {
 
 //--------------------------------------------------------------------------
 // Public scope
@@ -21,39 +21,41 @@ se.soma.media.utils.Alias = (function() {
     var _this = {};
     
 
-    RukaRenderer      = se.soma.media.utils.view.RukaRenderer;
+    RukaRenderer      = se.soma.utils.view.RukaRenderer;
 
-    RukaWorker        = se.soma.media.components.RukaWorker;
+    RukaWorker        = se.soma.components.RukaWorker;
 
-    RukaPage          = se.soma.media.utils.view.RukaPage;
+    RukaPage          = se.soma.utils.view.RukaPage;
 
-    MediaPlayer       = se.soma.media.utils.MediaPlayer;
+    MediaPlayer       = se.soma.utils.MediaPlayer;
 
-    MediaControls     = se.soma.media.components.MediaControls;
+    MediaControls     = se.soma.components.MediaControls;
 
-    AudioTrack        = se.soma.media.components.AudioTrack;
+    AudioTrack        = se.soma.components.AudioTrack;
 
-    RukaSettings      = se.soma.media.components.RukaSettings;
+    RukaSettings      = se.soma.components.RukaSettings;
 
-    RukaEvents        = se.soma.media.components.RukaEvents;    
+    RukaEvents        = se.soma.components.RukaEvents;    
 
-    RukaOptions       = se.soma.media.components.RukaOptions;
+    RukaOptions       = se.soma.components.RukaOptions;
 
-    RukaTransitions   = se.soma.media.components.RukaTransitions;
+    RukaTransitions   = se.soma.components.RukaTransitions;
 
-    RukaAnimations    = se.soma.media.components.RukaAnimations;
+    RukaAnimations    = se.soma.components.RukaAnimations;
 
-    RukaScreenEvents  = se.soma.media.components.RukaScreenEvents;
+    RukaScreenEvents  = se.soma.components.RukaScreenEvents;
 
-    ScrollBar         = se.soma.media.components.ScrollBar;
+    ScrollBar         = se.soma.components.ScrollBar;
 
-    Mail              = se.soma.media.utils.MailService;
+    Mail              = se.soma.utils.MailService;
 
-    Alertbox          = se.soma.media.components.Alertbox;
+    Alertbox          = se.soma.components.Alertbox;
     
-    Loader            = se.soma.media.components.Loader;
+    Loader            = se.soma.components.Loader;
 
-    RukaUI              = se.soma.system.RukaUI;
+    RukaUI            = se.soma.system.RukaUI;
+
+    RukaOS            = se.soma.system.RukaOS;
 
     return _this;
 

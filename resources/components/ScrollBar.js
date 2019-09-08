@@ -13,7 +13,7 @@
  * 
  *  @return { Object }
  */
-se.soma.media.components.ScrollBar = (function( settings, hold ) {
+se.soma.components.ScrollBar = (function( settings, hold ) {
     
       //----------------------------------------------------------------------
       // Strict mode

@@ -1,0 +1,47 @@
+{
+  
+  "Manifest": "scope/Manifest",
+  
+  "Polyfill": "system/Polyfill",
+  
+  "RukaRenderer": "utils/view/RukaRenderer",
+  
+  "RukaWorker": "components/RukaWorker",
+  
+  "RukaEvents": "components/RukaEvents",
+  
+  "RukaSettings": "components/RukaSettings",
+  
+  "RukaOptions": "components/RukaOptions",
+  
+  "RukaTransitions": "components/RukaTransitions",
+  
+  "RukaAnimations": "components/RukaAnimations",
+  
+  "RukaScreenEvents": "components/RukaScreenEvents",
+  
+  "ScrollBar": "components/ScrollBar",
+  
+  "Alertbox": "components/Alertbox",
+  
+  "Loader": "components/Loader",
+  
+  "RukaPage": "utils/view/RukaPage",
+  
+  "RukaUI": "system/RukaUI",
+  
+  "RukaOS": "system/RukaOS",
+  
+  "Alias": "scope/Alias",
+  
+  "AudioTrack": "components/AudioTrack",
+  
+  "MediaPlayer": "utils/MediaPlayer",
+  
+  "MailService": "utils/MailService",
+  
+  "AppInstaller": "system/AppInstaller",
+
+  "App": "../../app"
+
+}

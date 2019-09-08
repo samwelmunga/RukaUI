@@ -13,7 +13,7 @@
  * 
  *  @return { Object }
  */
-se.soma.media.components.RukaSettings = (function( _ui, _ix ) {
+se.soma.components.RukaSettings = (function( _ui, _ix ) {
     
     //----------------------------------------------------------------------
     // Strict mode

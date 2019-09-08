@@ -30,7 +30,7 @@
   // CLASS
   //----------------------------------------------------------------------
 
-  se.soma.media.utils.view.RukaPage = (function( layers, settings ) {
+  se.soma.utils.view.RukaPage = (function( layers, settings ) {
 
       
     //----------------------------------------------------------------------
@@ -87,28 +87,6 @@
 
     this.fullscreen   = false;
 
-    this.modes        = {
-
-      get scroll() {
-        return 'scroll';
-      },
-
-      get button() {
-        return 'button';
-      },
-
-      get timer() {
-        return 'timer';
-      },
-
-      get touch() {
-        return 'touch';
-      }
-
-    };
-
-    this.mode         = settings.getAttribute('mode') || this.modes.scroll;
-
     this.autoTimer    = settings.getAttribute('timer') || 5000;
     
     this.scrollTimer  = null;
@@ -132,6 +110,28 @@
     this.pageEvents   = RukaEvents.addAll(layers),
 
     this.eventData    = {};
+
+    this.mode         = settings.getAttribute('mode') || this.modes.scroll;
+
+    this.modes        = {
+
+      get scroll() {
+        return 'scroll';
+      },
+
+      get button() {
+        return 'button';
+      },
+
+      get timer() {
+        return 'timer';
+      },
+
+      get touch() {
+        return 'touch';
+      }
+
+    };
 
     /** Prototype binding */
     this.manualUpdateInterface = this.manualUpdateInterface.bind(this);
@@ -160,8 +160,8 @@
     return this;
 
   });
-  se.soma.media.utils.view.RukaPage.prototype = Object.create(se.soma.media.utils.view.RukaRenderer.prototype);
-  se.soma.media.utils.view.RukaPage.prototype.constructor = se.soma.media.utils.view.RukaPage;
+  se.soma.utils.view.RukaPage.prototype = Object.create(se.soma.utils.view.RukaRenderer.prototype);
+  se.soma.utils.view.RukaPage.prototype.constructor = se.soma.utils.view.RukaPage;
 
 
 
@@ -170,7 +170,7 @@
   // PROTOTYPES
   //----------------------------------------------------------------------
 
-  se.soma.media.utils.view.RukaPage.prototype.autoUpdateInterface = function( dir ) {
+  se.soma.utils.view.RukaPage.prototype.autoUpdateInterface = function( dir ) {
     this.offset = window.pageYOffset;
   
     if(this.scrolling == true || this.calls > 0) {
@@ -194,14 +194,14 @@
       case this.modes.button: this.direction = !!dir; break;
     }
 
-    console.log('autoUpdateInterface', this, dir);
+    //console.log('autoUpdateInterface', this, dir);
     updatePages.call(this);
     return this.page;
     
   };
 
-  se.soma.media.utils.view.RukaPage.prototype.manualUpdateInterface = function( page ) {
-  console.log('manualUpdateInterface', this, page);
+  se.soma.utils.view.RukaPage.prototype.manualUpdateInterface = function( page ) {
+  //console.log('manualUpdateInterface', this, page);
     rearrangeLayers.call(this, page);
     this.direction = (page < this.page) ? false : true;
     this.page = (this.direction) ? page - 1 : page + 1;
@@ -209,17 +209,17 @@
     
   };
 
-  se.soma.media.utils.view.RukaPage.prototype.touchUpdateInterface = function( e, dir ) {
+  se.soma.utils.view.RukaPage.prototype.touchUpdateInterface = function( e, dir ) {
 
     if(!dir || dir.orientation != this.orientation) return;
 
-console.log('touchUpdateInterface', this)
+//console.log('touchUpdateInterface', this)
     this.eventData.touch = dir;
     this.direction       = dir.isNext;
     this.offset   = dir.offset;
     this.origin   = dir.origin;
     
-    console.log('dir', dir, Math.abs(this.offset));
+//console.log('dir', dir, Math.abs(this.offset));
     
     if(Math.abs(this.offset) < 30) return;
     if(this.mode != this.modes.scroll) {
@@ -231,7 +231,7 @@ console.log('touchUpdateInterface', this)
     this.eventData = {}; // ok?
   };
 
-  se.soma.media.utils.view.RukaPage.prototype.resetUI = function() {
+  se.soma.utils.view.RukaPage.prototype.resetUI = function() {
 
     for(var i = 1; i < this.layers.length; i++) {
       this.activePage = this.layers[i];
@@ -240,14 +240,14 @@ console.log('touchUpdateInterface', this)
 
   };
 
-  se.soma.media.utils.view.RukaPage.prototype.addSettings = function( prop ) {
+  se.soma.utils.view.RukaPage.prototype.addSettings = function( prop ) {
     if(!prop) return;
     for(var p in prop) {
       this.settings[p] = prop[p];
     }
   };
 
-  se.soma.media.utils.view.RukaPage.prototype.updateSettings = function() {
+  se.soma.utils.view.RukaPage.prototype.updateSettings = function() {
     initGlobalSettings.call(this);
     initPageWrappers.call(this);
     initInterface.call(this);
@@ -304,7 +304,7 @@ console.log('touchUpdateInterface', this)
     
     this.settings.pageCacheSize = pageCacheSize;
 
-    // console.log('this.settings', this.settings.transition);
+    //console.log('this.settings', this.settings.transition);
 
   }
 
@@ -405,7 +405,7 @@ console.log('touchUpdateInterface', this)
     this.scrollBar.setHandler(this.manualUpdateInterface);
     this.scrollBar.updateScrollBar(this.activePage);
     this.addSettings({ scrollBar: this.scrollBar });
-    // console.log('initscrollBar > ' + this.id, scrollBar)
+    // //console.log('initscrollBar > ' + this.id, scrollBar)
     
   }
 
@@ -447,7 +447,7 @@ console.log('touchUpdateInterface', this)
     if(this.scrollBar)
       this.scrollBar.updateScrollBar(this.page);
     resetPages.call(this);
-    console.log('updatePages', data)
+    //console.log('updatePages', data)
     
   }
 

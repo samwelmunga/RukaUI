@@ -1,0 +1,13 @@
+{
+    "templates": [
+        { 
+            "name": "home",
+            "url": "./../../templates/html/home.html" 
+        },
+        { 
+            "name": "grid",
+            "url": "./../../templates/html/grid.html" 
+        }
+    ],
+    "default": "home"
+}

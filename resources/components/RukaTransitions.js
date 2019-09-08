@@ -13,7 +13,7 @@
  * 
  *  @return { Object }
  */
-se.soma.media.components.RukaTransitions = (function( key ) {
+se.soma.components.RukaTransitions = (function( key ) {
     
       //----------------------------------------------------------------------
       // Strict mode

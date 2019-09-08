@@ -21,10 +21,11 @@ var awaitWindow  = true;
 var AppInstaller = {
     
     install: function() {
+        window.addEventListener('load', AppInstaller.onDocumentReady);
         console.log('Booting worker');
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker
-                .register('../../service-worker.js')
+                .register('../resources/service-worker.js')
                 .then(function(sw) { 
                     console.log('Service Worker Registered');
                     SERVICE_WORKER = sw;
@@ -43,31 +44,27 @@ var AppInstaller = {
         }
     },
 
-    onApplicationReady: function() {
+    onDocumentReady: function() {
         loader = new Loader(document.get('.cover')[0]);
         workerLoader  = loader.start();
-        awaitWindow = false;
-        if(!awaitWorker) { 
-            AppInstaller.bootApp();
-        } else{
-            setTimeout(function() {
-                awaitWorker = false; 
-                AppInstaller.bootApp();
-            }, 5000);
-        }
     },
 
     bootApp: function() {
-        if(appHasBooted === true || awaitWorker === true || awaitWindow == true) return;
-        if(workerLoader) loader.stop(workerLoader);
+        if(appHasBooted === true) return;
         appHasBooted = true;
-        console.log('Booting app', SERVICE_WORKER);
-        APP_BOOT();
+        var readyStateCheckInterval = setInterval(function() {
+            if (document.readyState === "complete" && awaitWorker === false) {
+                clearInterval(readyStateCheckInterval);
+                if(workerLoader) loader.stop(workerLoader);
+                if(!APP_BOOT) return;
+                console.log('Booting app', SERVICE_WORKER);
+                APP_BOOT();
+            }
+        }, 10);
     }
     
 };
 
-window.addEventListener('load', AppInstaller.onApplicationReady);
 AppInstaller.install();
 
 })();

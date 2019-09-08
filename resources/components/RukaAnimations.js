@@ -13,7 +13,7 @@
  * 
  *  @return { Object }
  */
-se.soma.media.components.RukaAnimations = (function( layers, settings ) {
+se.soma.components.RukaAnimations = (function( layers, settings ) {
     
     //----------------------------------------------------------------------
     // Strict mode

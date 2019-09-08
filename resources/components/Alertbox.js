@@ -13,7 +13,7 @@
  * 
  *  @return { Object }
  */
-se.soma.media.components.Alertbox = (function( message, callback, cancable ) {
+se.soma.components.Alertbox = (function( message, callback, cancable ) {
   
     //----------------------------------------------------------------------
     // Strict mode
@@ -136,5 +136,5 @@ se.soma.media.components.Alertbox = (function( message, callback, cancable ) {
       if(message) this.alert();
 
 });
-se.soma.media.components.Alertbox.prototype = Object.create(se.soma.media.utils.view.RukaRenderer.prototype);
-se.soma.media.components.Alertbox.prototype.constructor = se.soma.media.components.Alertbox;
+se.soma.components.Alertbox.prototype = Object.create(se.soma.utils.view.RukaRenderer.prototype);
+se.soma.components.Alertbox.prototype.constructor = se.soma.components.Alertbox;

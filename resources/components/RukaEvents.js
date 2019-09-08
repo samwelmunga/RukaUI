@@ -12,7 +12,7 @@
  *  @author     Samwel Munga <samwelmunga@hotmail.se>
  * 
  */
-se.soma.media.components.RukaEvents = (function() {
+se.soma.components.RukaEvents = (function() {
 
   var m_this        = {},
 

@@ -12,7 +12,7 @@
  *  @author     Samwel Munga <samwelmunga@hotmail.se>
  * 
  */
-se.soma.media.components.AudioTrack = (function( obj, parent, autoplay ) {
+se.soma.components.AudioTrack = (function( obj, parent, autoplay ) {
 
     RukaRenderer.call(this, 'div');
 
@@ -425,5 +425,5 @@ se.soma.media.components.AudioTrack = (function( obj, parent, autoplay ) {
     return this;
         
 });
-se.soma.media.components.AudioTrack.prototype = Object.create(se.soma.media.utils.view.RukaRenderer.prototype);
-se.soma.media.components.AudioTrack.prototype.constructor = se.soma.media.components.AudioTrack;
+se.soma.components.AudioTrack.prototype = Object.create(se.soma.utils.view.RukaRenderer.prototype);
+se.soma.components.AudioTrack.prototype.constructor = se.soma.components.AudioTrack;

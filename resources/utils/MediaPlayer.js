@@ -12,7 +12,7 @@
  *  @author     Samwel Munga <samwelmunga@hotmail.se>
  * 
  */
-se.soma.media.utils.MediaPlayer = (function() {
+se.soma.utils.MediaPlayer = (function() {
     var _this = {},
         history = [],
         playlist = [],

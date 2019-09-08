@@ -13,7 +13,7 @@
  * 
  *  @return { Object }
  */
-se.soma.media.components.RukaWorker = (function( worker, options ) {
+se.soma.components.RukaWorker = (function( worker, options ) {
     
   
   //----------------------------------------------------------------------

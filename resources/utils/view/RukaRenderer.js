@@ -23,7 +23,7 @@
  * @return { Object}
  *
  */
-se.soma.media.utils.view.RukaRenderer = (function( el ) {
+se.soma.utils.view.RukaRenderer = (function( el ) {
 
   var elem;
 
@@ -50,7 +50,7 @@ se.soma.media.utils.view.RukaRenderer = (function( el ) {
 * @param { ref } Array  The array to be checked.
 * @param { ix }  Number The index-position to be checked.
 */
-se.soma.media.utils.view.RukaRenderer.prototype.isSet = function( ref, ix ) {
+se.soma.utils.view.RukaRenderer.prototype.isSet = function( ref, ix ) {
   if(!ref) return false;
   return (Array.isArray(ref) && ref[ ix ] && ref[ ix ] != '') ? true : false;
 };
@@ -62,7 +62,7 @@ se.soma.media.utils.view.RukaRenderer.prototype.isSet = function( ref, ix ) {
 * @param { elem } DOMElement  The element to be checked.
 * @param { tag }  String      The desired tag name.
 */
-se.soma.media.utils.view.RukaRenderer.prototype.isTag = function( elem, tag ) {
+se.soma.utils.view.RukaRenderer.prototype.isTag = function( elem, tag ) {
   return (elem.tagName && elem.tagName.toLowerCase() == tag) ? true : false;
 }
 
@@ -72,7 +72,7 @@ se.soma.media.utils.view.RukaRenderer.prototype.isTag = function( elem, tag ) {
 * @desc                  Converts DOM-list to array.
 * @param { list } Array  The DOM-list to be converted.
 */
-se.soma.media.utils.view.RukaRenderer.prototype.domToArray = function( list ) {
+se.soma.utils.view.RukaRenderer.prototype.domToArray = function( list ) {
   for(var arr = [], i = 0; i < list.length; arr.push(list[i++]));
   return arr;
 };
@@ -83,7 +83,7 @@ se.soma.media.utils.view.RukaRenderer.prototype.domToArray = function( list ) {
 * @desc                  Flatmaps a given array.
 * @param { list } Array  The array to be fattened.
 */
-se.soma.media.utils.view.RukaRenderer.prototype.flatDOMList = function( list ) {
+se.soma.utils.view.RukaRenderer.prototype.flatDOMList = function( list ) {
   return list.reduce(function(a, b) {
       return a.concat(b);
   }, []);
@@ -95,7 +95,7 @@ se.soma.media.utils.view.RukaRenderer.prototype.flatDOMList = function( list ) {
 * @param { el } DOMElement the target-element of the attributes.
 * @param { vl } Object the attributes to be set.
 */
-se.soma.media.utils.view.RukaRenderer.prototype.addAttribute = function( el, vl ) {
+se.soma.utils.view.RukaRenderer.prototype.addAttribute = function( el, vl ) {
 
   for(var x in vl) {
     switch(x) {
@@ -104,6 +104,7 @@ se.soma.media.utils.view.RukaRenderer.prototype.addAttribute = function( el, vl 
       case 'ref':                                                  break;
       case 'innerHTML': el.innerHTML = vl[x];                      break;
       case 'innerText': el.innerText = vl[x];                      break;
+      case 'text': el.innerText = vl[x];                           break;
       case 'style': el.setAttribute(x,convertStyleObject(vl[x]));  break;
       case 'on':  for(var p in vl[x]) { el['on' + p] = vl[x][p]; } break;
       default: el.setAttribute(x.replace(/_/gi, '-'),vl[x]);
@@ -126,10 +127,10 @@ se.soma.media.utils.view.RukaRenderer.prototype.addAttribute = function( el, vl 
 * @param { String }      ref String containing DOM-reference name and object.
 * @param { HTMLElement } el  The DOM to refer to.
 */
-se.soma.media.utils.view.RukaRenderer.prototype.setRef = function( el, ref ) {
+se.soma.utils.view.RukaRenderer.prototype.setRef = function( el, ref ) {
   switch(this.isSet(ref,0)) {
-    case true: ref[0][ ref[1] ] = new se.soma.media.utils.view.RukaRenderer(el); break;
-    default:   this[ ref ]      = new se.soma.media.utils.view.RukaRenderer(el);
+    case true: ref[0][ ref[1] ] = new se.soma.utils.view.RukaRenderer(el); break;
+    default:   this[ ref ]      = new se.soma.utils.view.RukaRenderer(el);
   }
   return el;
 };
@@ -138,7 +139,7 @@ se.soma.media.utils.view.RukaRenderer.prototype.setRef = function( el, ref ) {
 /** @method getElements
 * @desc
 */
-se.soma.media.utils.view.RukaRenderer.prototype.each = function( children, func ) {
+se.soma.utils.view.RukaRenderer.prototype.each = function( children, func ) {
   
   children = typeof(children) == 'string' ? this.dom.get(children) : (children) ? children :this.dom.children;
   for(var i = 0, child; i < children.length; i++) {
@@ -157,7 +158,7 @@ se.soma.media.utils.view.RukaRenderer.prototype.each = function( children, func 
 * @param { String }         name  ...
 * @param { HTMLCollection } elems ...
 */
-se.soma.media.utils.view.RukaRenderer.prototype.getElements = function( type, name, elems ) {
+se.soma.utils.view.RukaRenderer.prototype.getElements = function( type, name, elems ) {
 
       elems    = elems || this.dom.children;
   var results  = [],
@@ -196,7 +197,7 @@ se.soma.media.utils.view.RukaRenderer.prototype.getElements = function( type, na
  * @prop   { HTMLElement } elem   The current subelement.
  * @return { HTMLElement } The processed main element.
  */
-se.soma.media.utils.view.RukaRenderer.prototype.setChild = function( domData, parent ) {
+se.soma.utils.view.RukaRenderer.prototype.setChild = function( domData, parent ) {
 
   var elem,
       parent = (parent && parent.nodeName) ? parent : this.dom, 
@@ -227,11 +228,11 @@ se.soma.media.utils.view.RukaRenderer.prototype.setChild = function( domData, pa
  * @param  { HTMLElement }  html Element to be converted.
  * @return { Object }       The internal object-representation of the Element.
  */
-se.soma.media.utils.view.RukaRenderer.prototype.convertHTML = function( html ) {
+se.soma.utils.view.RukaRenderer.prototype.convertHTML = function( html, array ) {
   
   html = html || this.dom;
   
-  var i = 0, copies = {};
+  var i = 0, copies = array ? [] : {};
   for(var copy, attrs; i < html.children.length; i++) {
     
     copy           = {};
@@ -240,11 +241,15 @@ se.soma.media.utils.view.RukaRenderer.prototype.convertHTML = function( html ) {
     attrs = html.children[i].getAttributeNames();
     if(attrs.length > 0) {
       attrs.forEach(function(attr) {
-        copy[ attr ] = html.children[i].getAttribute( attr ) || true;
+        if(attr == 'on') {
+          copy['on']   = JSON.parse(html.children[i].getAttribute( attr ));
+        } else {
+          copy[ attr ] = html.children[i].getAttribute( attr ) || attr;
+        }
       });
     }
     if(html.children[i].children.length > 0) {
-      copy.children = se.soma.media.utils.view.RukaRenderer.prototype.convertHTML(html.children[i]);
+      copy.children = se.soma.utils.view.RukaRenderer.prototype.convertHTML(html.children[i], array);
     } else {
       copy.text = html.children[i].innerHTML;
     }
@@ -268,14 +273,14 @@ se.soma.media.utils.view.RukaRenderer.prototype.convertHTML = function( html ) {
  * @param  { RukaRenderer } scope Currently running RukaRenderer.
  * @return { RukaRenderer } A RukaRenderer-instance representing the printed Object data.
  */
-se.soma.media.utils.view.RukaRenderer.prototype.printHTML = function( obj, scope ) {
+se.soma.utils.view.RukaRenderer.prototype.printHTML = function( obj, scope ) {
   scope = scope || this;
   
   for(var data in obj) {
     if(typeof obj[ data ] == 'object') {
       if(obj[ data ][ 'children' ]) {
         
-        var elem = new se.soma.media.utils.view.RukaRenderer(obj[ data ][ 'element' ]);
+        var elem = new se.soma.utils.view.RukaRenderer(obj[ data ][ 'element' ]);
         elem.printHTML(obj[ data ][ 'children' ], elem);
         obj[ data ][ 'element' ] = elem.dom;
         scope.setChild(new Array(obj[ data ]));

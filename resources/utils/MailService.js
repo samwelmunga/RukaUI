@@ -14,7 +14,7 @@
  */
   
 
-se.soma.media.utils.MailService = (function() {
+se.soma.utils.MailService = (function() {
 
         
     //----------------------------------------------------------------------

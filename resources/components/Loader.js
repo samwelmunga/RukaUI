@@ -13,7 +13,7 @@
  * 
  *  @return { Object }
  */
-se.soma.media.components.Loader = (function( parent, settings ) {
+se.soma.components.Loader = (function( parent, settings ) {
   
     //----------------------------------------------------------------------
     // Strict mode
@@ -44,7 +44,13 @@ se.soma.media.components.Loader = (function( parent, settings ) {
 
         
         _settings.dom = [{ 
-                          element: 'div', class: 'circle' 
+                          element: 'div', class: 'circle',
+                          children: [
+                            { element: 'div', class: 'crl c-left' },
+                            { element: 'div', class: 'crl c-top' },
+                            { element: 'div', class: 'crl c-right' },
+                            { element: 'div', class: 'crl c-bottom' }
+                          ]
                         },
                         { 
                           element: 'div', 

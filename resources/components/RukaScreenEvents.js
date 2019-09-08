@@ -9,7 +9,7 @@
  * 
  *  @return { Object }
  */
-se.soma.media.components.RukaScreenEvents = (function( main ) {
+se.soma.components.RukaScreenEvents = (function( main ) {
   
     //----------------------------------------------------------------------
     // Strict mode

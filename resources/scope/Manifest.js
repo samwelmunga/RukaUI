@@ -5,11 +5,10 @@
 
 if (window.se == undefined) window.se = {};
 if (window.se.soma == undefined) window.se.soma = {};
-if (window.se.soma.media == undefined) window.se.soma.media = {};
 
 
 /**
- *  Framework package
+ *  Library base package
  *
  *  @version    1.0
  *  @copyright  Copyright (c) 2017-2022.
@@ -17,7 +16,7 @@ if (window.se.soma.media == undefined) window.se.soma.media = {};
  *  @since      Nov 15, 2017
  *  @author     Samwel Munga <samwelmunga88@hotmail.se>
  */
-se.soma.media = (function() {
+se.soma = (function() {
 
 //--------------------------------------------------------------------------
 // Public scope
@@ -40,7 +39,7 @@ se.soma.media = (function() {
      *
      *  @type {String}
      */
-    _this.version = "1.3.5";
+    _this.version = "1.6.0";
 
     /*-----------------------------------------------------
     |||||||||||||||||	PACKAGE STRUCTURE 	|||||||||||||||||
