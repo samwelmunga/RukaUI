@@ -34,51 +34,51 @@ se.soma = (function() {
     ||||||||||||||||||	VERSION 	|||||||||||||||||||
     -------------------------------------------------------*/
 
-    /**
-     *  Current version running
-     *
-     *  @type {String}
-     */
-    _this.version = "1.6.0";
+    // /**
+    //  *  Current version running
+    //  *
+    //  *  @type {String}
+    //  */
+    // _this.version = "1.6.0";
 
-    /*-----------------------------------------------------
-    |||||||||||||||||	PACKAGE STRUCTURE 	|||||||||||||||||
-    -------------------------------------------------------*/
+    // /*-----------------------------------------------------
+    // |||||||||||||||||	PACKAGE STRUCTURE 	|||||||||||||||||
+    // -------------------------------------------------------*/
 
-    /**
-     *  Package structure for component related classes
-     *
-     *  @type {Object}
-     */
-    _this.components = {};
+    // /**
+    //  *  Package structure for component related classes
+    //  *
+    //  *  @type {Object}
+    //  */
+    // _this.components = {};
 
-    /**
-     *  Package structure for scope related classes
-     *
-     *  @type {Object}
-     */
-    _this.scope = {};
+    // /**
+    //  *  Package structure for scope related classes
+    //  *
+    //  *  @type {Object}
+    //  */
+    // _this.scope = {};
 
-    /**
-     *  Package structure for system related classes
-     *
-     *  @type {Object}
-     */
-    _this.system = {};
+    // /**
+    //  *  Package structure for system related classes
+    //  *
+    //  *  @type {Object}
+    //  */
+    // _this.system = {};
     
-    /**
-     *  Package structure for user interface related classes
-     *
-     *  @type {Object}
-     */
-    _this.utils = {};
+    // /**
+    //  *  Package structure for user interface related classes
+    //  *
+    //  *  @type {Object}
+    //  */
+    // _this.utils = {};
 
-    /**
-     *  Package structure for view related classes
-     *
-     *  @type {Object}
-     */
-    _this.utils.view = {};
+    // /**
+    //  *  Package structure for view related classes
+    //  *
+    //  *  @type {Object}
+    //  */
+    // _this.utils.view = {};
 
 
     /**

@@ -21,41 +21,41 @@ se.soma.utils.Alias = (function() {
     var _this = {};
     
 
-    RukaRenderer      = se.soma.utils.view.RukaRenderer;
+    // RukaRenderer      = se.soma.utils.view.RukaRenderer;
 
-    RukaWorker        = se.soma.components.RukaWorker;
+    // RukaWorker        = se.soma.components.RukaWorker;
 
-    RukaPage          = se.soma.utils.view.RukaPage;
+    // RukaPage          = se.soma.utils.view.RukaPage;
 
-    MediaPlayer       = se.soma.utils.MediaPlayer;
+    // MediaPlayer       = se.soma.utils.MediaPlayer;
 
-    MediaControls     = se.soma.components.MediaControls;
+    // MediaControls     = se.soma.components.MediaControls;
 
-    AudioTrack        = se.soma.components.AudioTrack;
+    // AudioTrack        = se.soma.components.AudioTrack;
 
-    RukaSettings      = se.soma.components.RukaSettings;
+    // RukaSettings      = se.soma.components.RukaSettings;
 
-    RukaEvents        = se.soma.components.RukaEvents;    
+    // RukaEvents        = se.soma.components.RukaEvents;    
 
-    RukaOptions       = se.soma.components.RukaOptions;
+    // RukaOptions       = se.soma.components.RukaOptions;
 
-    RukaTransitions   = se.soma.components.RukaTransitions;
+    // RukaTransitions   = se.soma.components.RukaTransitions;
 
-    RukaAnimations    = se.soma.components.RukaAnimations;
+    // RukaAnimations    = se.soma.components.RukaAnimations;
 
-    RukaScreenEvents  = se.soma.components.RukaScreenEvents;
+    // RukaScreenEvents  = se.soma.components.RukaScreenEvents;
 
-    ScrollBar         = se.soma.components.ScrollBar;
+    // ScrollBar         = se.soma.components.ScrollBar;
 
-    Mail              = se.soma.utils.MailService;
+    // Mail              = se.soma.utils.MailService;
 
-    Alertbox          = se.soma.components.Alertbox;
+    // Alertbox          = se.soma.components.Alertbox;
     
-    Loader            = se.soma.components.Loader;
+    // Loader            = se.soma.components.Loader;
 
-    RukaUI            = se.soma.system.RukaUI;
+    // RukaUI            = se.soma.system.RukaUI;
 
-    RukaOS            = se.soma.system.RukaOS;
+    // RukaOS            = se.soma.system.RukaOS;
 
     return _this;
 

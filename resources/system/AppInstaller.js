@@ -16,13 +16,10 @@ var appHasBooted = false;
 
 var awaitWorker  = true;
 
-var awaitWindow  = true;
-
 var AppInstaller = {
     
     install: function() {
         window.addEventListener('load', AppInstaller.onDocumentReady);
-        console.log('Booting worker');
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker
                 .register('../resources/service-worker.js')
@@ -33,7 +30,7 @@ var AppInstaller = {
                     AppInstaller.bootApp();
                 })
                 .catch(function(err) { 
-                    console.log('Something went wrong: ' + err);
+                    console.log('Service Worker failed to install: ' + err);
                     awaitWorker = false;
                     AppInstaller.bootApp();
                 });

@@ -76,12 +76,15 @@
     var script,
         key = scripts.shift(),
         url = library[key],
+        nsp = 'se/soma/' + url,
         obj = {};
 
     function next() {
       if(scripts.length == 0) return callback ? callback() : null;
       else loadScripts(scripts, callback);
     }
+
+    console.log('nsp', nsp)
 
     obj[key] = url;
     if(!url) {
@@ -95,15 +98,16 @@
     script.type = 'text/javascript';
     script.onload = function() {
       loadedSrcipts[key] = obj;
-      addAlias(key, 'se/soma/' + url);
-      console.log('> Successfully loaded ' + key) + '.';
+      addAlias(key, nsp);
+      console.log('> Successfully loaded ' + key + '.');
       next();
     };
     script.onerror = function() {
       failedSrcipts[key] = obj;
-      console.warn('> Failed to load ' + key) + '.';
+      console.warn('> Failed to load ' + key + '.');
       next();
     };
+    addNameSpace(nsp);
     script.src = baseUrl + url + '.js?' + cache;
     document.head.appendChild(script);
 
@@ -111,23 +115,45 @@
 
   }
 
-  function getClass( parent, path ) {
-    if(path.length == 0) return parent;
+  function getScope( parent, path ) {
+    if(path.length <= 1) return parent;
     var p = path.shift().replace('..', 'parent');
-    if(!parent[p]) parent[p] = {};
-    return getClass(parent[p], path);
+    console.log('p', p, parent, window.se);
+    if(!parent[p]) throw new Error('Application build error: missing scope "' + p + '"');
+    return getScope(parent[p], path);
+  }
+
+  function setScope( parent, path ) {
+    var p = path.shift().replace('..', 'parent');
+    console.log('p2', p, parent, path.slice(0));
+    if(!parent[p]) {
+      Object.defineProperty(parent, p, {
+        value: {}
+      });
+    } else if(typeof(parent[p]) != 'object' || Array.isArray(parent[p])) {
+      throw new Error('Application build error: namespace conflict between scope and property "' + p + '"');
+    }
+    if(path.length > 1) setScope(parent[p], path);
+  }
+
+  function addNameSpace( source ) {
+    var path  = source.split('/'),
+        _path = path.slice(0);
+    setScope(window, path);
+    console.log('window.' + _path.join('.'), ' = ', getScope(window, _path.slice(0)));
   }
 
   function addAlias( alias, source ) {
     var path  = source.split('/');
-    var _path = path.slice(0);
-    window[alias] = getClass(window, path);
-    console.log('window + [' + alias + ']', ' = ', window[alias], _path);
+    window[alias] = getScope(window, path)[alias];
+    console.log('window[' + alias + ']', ' = ', window[alias]);
   }
 
-  window.require = async function( key ) {
-    var _Class = await loadScript(key);
-    return _Class;
-  };
+  Object.defineProperty(window, 'require', {
+    value: async function( key ) {
+      var _Class = await loadScript(key);
+      return _Class;
+    }
+  });
     
 })();
